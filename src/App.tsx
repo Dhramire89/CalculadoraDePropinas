@@ -2,6 +2,7 @@ import MenuItem from "./componets/MenuItem";
 import { menuItems } from "./data/db";
 import useOrder from "./hooks/useOrder";
 import OrderContents from "./componets/OrderContents";
+import OrderTotals from "./componets/OrderTotals";
 
 function App() {
   const { order, addItem, removeItem } = useOrder();
@@ -27,6 +28,7 @@ function App() {
 
         <div className="border border-dashed border-slate-300 rounded-lg space-y-10">
           <OrderContents order={order} removeItem={removeItem} />
+          <OrderTotals />
         </div>
       </main>
     </>
