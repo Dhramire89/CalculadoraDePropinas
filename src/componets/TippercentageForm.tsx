@@ -16,7 +16,10 @@ const tipOptions = [
   },
 ];
 
-export default function TippercentageForm() {
+type TippercentageFormProps = {
+  setTip: React.Dispatch<React.SetStateAction<number>>; // se infiere del App.tsx
+};
+export default function TippercentageForm({ setTip }: TippercentageFormProps) {
   return (
     <div>
       <h3 className="font-black text-2xl">Propina</h3>
@@ -29,6 +32,7 @@ export default function TippercentageForm() {
               type="radio"
               name="tip"
               value={tip.value}
+              onChange={(e) => setTip(+e.target.value)} // se coloca el signo de  + para convertir el valor a number
             ></input>
           </div>
         ))}

@@ -4,6 +4,9 @@ import type { MenuItem, OrderItem } from "../types";
 export default function useOrder() {
   const [order, setOrder] = useState<OrderItem[]>([]);
 
+  // nuevo state para calcular las propinas
+  const [tip, setTip] = useState(0);
+
   // funcion para agregar elementos
   const addItem = (item: MenuItem) => {
     const itemExist = order.find((orderItem) => orderItem.id === item.id); // nos dice si lo encontro o NO
@@ -28,6 +31,8 @@ export default function useOrder() {
 
   return {
     order,
+    tip,
+    setTip,
     addItem,
     removeItem,
   };
