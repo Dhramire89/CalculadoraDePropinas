@@ -3,6 +3,7 @@ import { menuItems } from "./data/db";
 import useOrder from "./hooks/useOrder";
 import OrderContents from "./componets/OrderContents";
 import OrderTotals from "./componets/OrderTotals";
+import TippercentageForm from "./componets/TippercentageForm";
 
 function App() {
   const { order, addItem, removeItem } = useOrder();
@@ -28,6 +29,7 @@ function App() {
 
         <div className="border border-dashed border-slate-300 rounded-lg space-y-10">
           <OrderContents order={order} removeItem={removeItem} />
+          <TippercentageForm />
           <OrderTotals order={order} />
         </div>
       </main>
