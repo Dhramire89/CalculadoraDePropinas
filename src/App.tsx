@@ -28,11 +28,17 @@ function App() {
         </div>
 
         <div className="border border-dashed border-slate-300 rounded-lg space-y-10">
-          <OrderContents order={order} removeItem={removeItem} />
+          {order.length > 0 ? (
+            <>
+              <OrderContents order={order} removeItem={removeItem} />
 
-          <TippercentageForm setTip={setTip} />
+              <TippercentageForm setTip={setTip} tip={tip} />
 
-          <OrderTotals order={order} tip={tip} placeOrder={placeOrder} />
+              <OrderTotals order={order} tip={tip} placeOrder={placeOrder} />
+            </>
+          ) : (
+            <p className="text-center">La orden esta vacia</p>
+          )}
         </div>
       </main>
     </>
