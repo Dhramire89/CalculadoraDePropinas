@@ -4,12 +4,15 @@ import { formatCurrency } from "../helpers";
 
 type OrderTotalProps = {
   order: OrderItem[];
+  tip: number;
 };
-export default function OrderTotals({ order }: OrderTotalProps) {
+export default function OrderTotals({ order, tip }: OrderTotalProps) {
   const subTotalAmount = useMemo(
     () => order.reduce((total, item) => total + item.quantity * item.price, 0),
     [order]
   );
+
+  const tipAmount = useMemo(() => subTotalAmount * tip, [tip, order]);
 
   return (
     <>
@@ -23,7 +26,7 @@ export default function OrderTotals({ order }: OrderTotalProps) {
         <p>
           {" "}
           Propina:{" "}
-          <span className="font-bold"> {formatCurrency(subTotalAmount)}</span>
+          <span className="font-bold"> {formatCurrency(tipAmount)}</span>
         </p>
         <p>
           {" "}
