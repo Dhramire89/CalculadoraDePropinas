@@ -11,7 +11,7 @@ export default function OrderTotals({ order, tip }: OrderTotalProps) {
     () => order.reduce((total, item) => total + item.quantity * item.price, 0),
     [order]
   );
-
+  // ejecuta el codigo solamente cuando cambien las dependecias "tip y order"
   const tipAmount = useMemo(() => subTotalAmount * tip, [tip, order]);
 
   return (
@@ -31,7 +31,10 @@ export default function OrderTotals({ order, tip }: OrderTotalProps) {
         <p>
           {" "}
           Total a pagar:{" "}
-          <span className="font-bold"> {formatCurrency(subTotalAmount)}</span>
+          <span className="font-bold">
+            {" "}
+            {formatCurrency(subTotalAmount + tipAmount)}
+          </span>
         </p>
       </div>
     </>
