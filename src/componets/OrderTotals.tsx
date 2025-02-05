@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { OrderItem } from "../types";
 import { formatCurrency } from "../helpers";
 
@@ -7,12 +7,14 @@ type OrderTotalProps = {
   tip: number;
 };
 export default function OrderTotals({ order, tip }: OrderTotalProps) {
+  // esta funcion esta con UseMemo
   const subTotalAmount = useMemo(
     () => order.reduce((total, item) => total + item.quantity * item.price, 0),
     [order]
   );
+  // este es un ejemplo con UseCallback, tienen la misma funcion, pero la estructura es diferente, usa () para las funciones
   // ejecuta el codigo solamente cuando cambien las dependecias "tip y order"
-  const tipAmount = useMemo(() => subTotalAmount * tip, [tip, order]);
+  const tipAmount = useCallback(() => subTotalAmount * tip, [tip, order]);
 
   return (
     <>
@@ -26,14 +28,14 @@ export default function OrderTotals({ order, tip }: OrderTotalProps) {
         <p>
           {" "}
           Propina:{" "}
-          <span className="font-bold"> {formatCurrency(tipAmount)}</span>
+          <span className="font-bold"> {formatCurrency(tipAmount())}</span>
         </p>
         <p>
           {" "}
           Total a pagar:{" "}
           <span className="font-bold">
             {" "}
-            {formatCurrency(subTotalAmount + tipAmount)}
+            {formatCurrency(subTotalAmount + tipAmount())}
           </span>
         </p>
       </div>
